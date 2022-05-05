@@ -1,6 +1,20 @@
 <?php get_header(); ?>
 
 <main id="main-content">
+	<style>
+		body>main {
+			display: flex;
+			gap: 10px;
+			flex-flow: wrap;
+			justify-content: space-around;
+		}
+		body>main>article {
+			width: 30%;
+		}
+		body>footer {
+			width:100%;
+		}
+	</style>
 	<?php
 	/*
 	echo get_the_ID();
@@ -56,18 +70,44 @@
 if(get_the_ID()==161):
 	$categories_list = get_categories();
 	$posts_by_category = [];
+	$posts_by_category_ = [];
 	foreach($categories_list as $v)
 		$posts_by_category[$v->name] = [];
+		$posts_by_category_[$v->name] = [];
 	
 	if ( have_posts() ) :
 		while ( have_posts() ) : the_post();
-		var_dump(get_the_category()[0]->name);
-		echo $i++ . '| ';
+			var_dump(get_the_category()[0]->name);
+			//echo $i++ . '| ';
 			$posts_by_category[get_the_category()[0]->name][] = get_post();
-	
+			$posts_by_category_[get_the_category()[0]->name][] = array(
+				get_the_title(),
+				get_the_post_thumbnail()
+			);
 		endwhile;
 	endif;
 	
+	var_dump($posts_by_category["cat3"][0]);
+	
+	foreach($posts_by_category_ as $posts):
+		echo count($posts);
+		?>
+		<article>
+		<?php
+			foreach($posts as $post):
+			// var_dump($post);
+			?>
+				<nav>
+					<h3><?php echo $post[0]; ?></h3>
+					<p><?php echo $post[1]; ?></p>					
+				</nav>
+			<?php
+			endforeach;
+			?>
+		</article>
+		<?php
+	endforeach;	
+	echo"<hr/>fdsjifsf<hr/>fdsjifsf<hr/>fdsjifsf";
 	foreach($posts_by_category as $posts):
 		echo count($posts);
 		?>
@@ -193,7 +233,7 @@ else :
 							the_content();
 						}
 					?>
-				<?php endif; ?>
+				<?php endif; ?> 
 
 					</article>
 			<?php

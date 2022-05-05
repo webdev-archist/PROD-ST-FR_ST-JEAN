@@ -1,0 +1,12 @@
+body>main {
+    display: flex;
+    gap: 10px;
+    flex-flow: wrap;
+    justify-content: space-around;
+}
+body>main>article {
+    width: 30%;
+}
+body>footer {
+    width:100%;
+}
