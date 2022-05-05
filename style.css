@@ -4,7 +4,10 @@ body>main {
     flex-flow: wrap;
     justify-content: space-around;
 }
-body>main>article {
+body>main>:not(section) {
+    position:absolute;
+}
+body>main>section {
     width: 30%;
 }
 body>footer {
